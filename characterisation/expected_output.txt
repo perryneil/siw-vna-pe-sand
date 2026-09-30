@@ -1,0 +1,33 @@
+========================================================================
+PE: 1015 points, 661.2-1760.1 cm-1, mean step 1.084 cm-1, noise 11.5 counts
+========================================================================
+   shift  rel. int.      SNR   literature match
+   723.9      0.027      7.0   
+   880.9      0.030      7.7   
+  1063.4      0.555    143.4   PE 1062
+  1129.0      0.569    147.0   PE 1130
+  1169.7      0.097     25.2   PE 1170, PP 1168
+  1193.8      0.015      4.0   PS 1197
+  1296.3      1.000    258.4   PE 1295
+  1371.5      0.075     19.4   PE 1370
+  1418.6      0.284     73.4   PE 1416
+  1441.4      0.734    189.8   PE 1440, PP 1435
+  1456.9      0.392    101.3   PE 1460, PP 1458, PS 1450
+  1460.0      0.406    105.0   PE 1460, PP 1458
+  1554.0      0.027      6.9   
+Reference PE bands found: 8/9   missing: [1080]
+Peaks not assigned to PE: [724, 881, 1194, 1554]
+
+========================================================================
+Marker bands of other materials
+  peak detected = a 6-sigma peak within +/- 4 cm-1 of the marker;
+  intensity = baseline-corrected signal there, % of the strongest band
+========================================================================
+PE:
+  PS 1001       peak detected: no    intensity   0.1 %
+  PS 1602       peak detected: no    intensity   1.8 %
+  PP 809        peak detected: no    intensity   0.7 %
+  PP 841        peak detected: no    intensity   1.7 %
+  PP 973        peak detected: no    intensity   0.7 %
+  calcite 1086  peak detected: no    intensity   6.5 %
+
