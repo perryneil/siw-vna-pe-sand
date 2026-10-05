@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+results.txt
+
+# working files kept out of the published repository
+R checking outputs/
+/S21-air-cst-v2.txt
+/air_S21_overlay_aligned_for_matlab.csv
+/plot_s21_air_sand_plastic_librevna.m
+figures/output/Supplementary_figure_3.png

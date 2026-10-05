@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Supplementary figure 3 - baseline-corrected Raman spectrum of the PE fraction.
+Supplementary figure 1 - baseline-corrected Raman spectrum of the PE fraction.
 
 The spectrum is baseline-corrected by asymmetric least squares (same settings
 as characterisation/raman_band_analysis.py), normalised to its strongest band,
@@ -10,8 +10,8 @@ lines mark where polypropylene (PP), polystyrene (PS) and calcite (CaCO3)
 bands would appear.
 
 Usage (from the repository root):
-    python figures/make_supplementary_figure3.py
-        -> figures/output/Supplementary_figure_3.png
+    python figures/make_supplementary_figure1.py
+        -> figures/output/Supplementary_figure_1.png
 """
 
 import os
@@ -71,8 +71,8 @@ def main():
     ax.set_ylabel("Normalised intensity")
     ax.spines[["top", "right"]].set_visible(False)
 
-    fig.savefig(out_path("Supplementary_figure_3.png"), dpi=300, bbox_inches="tight")
-    print("written", out_path("Supplementary_figure_3.png"))
+    fig.savefig(out_path("Supplementary_figure_1.png"), dpi=300, bbox_inches="tight")
+    print("written", out_path("Supplementary_figure_1.png"))
 
 
 if __name__ == "__main__":

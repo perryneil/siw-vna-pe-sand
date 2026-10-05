@@ -1,5 +1,4 @@
 # SIW–VNA discrimination of polyethylene microplastic from sand
-# First Edit Test
 
 Data and analysis code for the article:
 
@@ -20,17 +19,23 @@ files.
 data/
   vna/        11 raw LibreVNA exports (air baseline, PE_0001–0005, sand_0001–0005)
   raman/      Raman spectrum of the PE fraction (Php-MP-Raman-PE.txt)
+  simulation/ CST simulation of the air-filled cavity (S21-air-cst-v2.txt)
 analysis/
   siw_analysis.py          all transmission statistics (Tables 2 and 3, Results)
   expected_output.txt      the output of that script, for comparison
+  siw_analysis.R           independent R version of siw_analysis.py
+  expected_output_R.txt    the output of the R version
+  compare_r_python.py      runs both versions and compares their results
+  R_vs_Python_comparison.md   outcome of that comparison
 characterisation/
   raman_band_analysis.py   Raman band assignment for the PE fraction
   expected_output.txt      the output of that script, for comparison
 figures/
   common.py                shared loading helpers
+  make_figure3.py          Figure 3
   make_figure4.py          Figure 4
   make_figure5.py          Figure 5
-  make_supplementary_figure3.py   Supplementary figure 3
+  make_supplementary_figure1.py   Supplementary figure 1
   output/                  figures as produced by the scripts
 requirements.txt
 LICENSE
@@ -51,14 +56,42 @@ Run every command from the repository root.
 ```bash
 python analysis/siw_analysis.py                     # transmission statistics
 python characterisation/raman_band_analysis.py      # Raman band analysis
+python figures/make_figure3.py                      # -> figures/output/Figure_3.png
 python figures/make_figure4.py                      # -> figures/output/Figure_4.png
 python figures/make_figure5.py                      # -> figures/output/Figure_5.png
-python figures/make_supplementary_figure3.py        # -> figures/output/Supplementary_figure_3.png
+python figures/make_supplementary_figure1.py        # -> figures/output/Supplementary_figure_1.png
 ```
 
 The two analysis scripts accept `--out FILE` to save a transcript. They also accept `--data DIR`
 if the data are stored elsewhere. Compare your transcript with the `expected_output.txt` in the
 same folder.
+
+## R version of the statistics
+
+`analysis/siw_analysis.R` reimplements `analysis/siw_analysis.py` in base R (R 4.0 or later, no
+add-on packages). It uses the same feature frequencies, search bands, notch convention and tests,
+and prints the same report. Run it from the repository root:
+
+```bash
+Rscript analysis/siw_analysis.R                     # same options: --data DIR, --out FILE
+python analysis/compare_r_python.py                 # run both versions and compare
+```
+
+If `Rscript` is not on the PATH, pass its location to the comparison script, for example
+`--rscript "C:/Program Files/R/R-4.4.1/bin/Rscript.exe"`.
+
+The R report is identical, line for line, to `analysis/expected_output.txt`. Compared at full
+double precision, the largest relative difference between the two versions over every
+p-value, effect size, notch parameter and summary statistic is 3.6 × 10⁻¹². This comes from
+floating-point rounding. Two implementation details differ:
+
+- Welch's t-test is written out explicitly instead of calling `t.test()`, so that degenerate
+  frequency points give p = 1, as in the Python script, instead of an error. On these data it
+  agrees with `t.test(var.equal = FALSE)` at all 501 points.
+- The Holm and Benjamini–Hochberg adjustments use `p.adjust()`, which applies the same
+  formulas as the hand-written Python functions.
+
+Details are in `analysis/R_vs_Python_comparison.md`.
 
 ## What each script reproduces
 
@@ -107,6 +140,10 @@ are kept exactly as exported, because the scripts identify the PE and sand trial
 `data/raman/Php-MP-Raman-PE.txt` has two tab-separated columns: Raman shift (cm⁻¹) and
 intensity (counts). The spectrum covers 661–1760 cm⁻¹. It was acquired with 785 nm excitation
 through a 10× objective.
+
+`data/simulation/S21-air-cst-v2.txt` is the CST Studio Suite export of the simulated air-filled
+cavity: two columns, frequency (GHz) and |S21| (dB), from 0.1 to 6 GHz. Figure 3 plots it and the
+measured air baseline each on its own frequency axis, without resampling or alignment.
 
 ## Conventions made explicit by the code
 
