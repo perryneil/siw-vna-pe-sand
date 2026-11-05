@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Supplementary figure 1 - baseline-corrected Raman spectrum of the PE fraction.
+Supplementary figure S1 - baseline-corrected Raman spectrum of the PE fraction.
 
 The spectrum is baseline-corrected by asymmetric least squares (same settings
 as characterisation/raman_band_analysis.py), normalised to its strongest band,

@@ -26,7 +26,7 @@ Holm survivors (p_adj < 0.05):
         5.5081         7.618   4.76   8.39e-05    0.042   0.0056
 
 ------------------------------------------------------------------------------
-2. Table 2 - replicate statistics by spectral feature
+2. Table 4 - replicate statistics by spectral feature
 ------------------------------------------------------------------------------
 Feature          GHz      air      sand mean+-SD        PE mean+-SD    diff     d     raw p     Holm     BH q
 F1 min        2.3646   -13.14     -13.17 +- 0.02     -13.22 +- 0.02   +0.05  2.41     0.007    1.000   0.0291
@@ -43,7 +43,7 @@ Note: the F3 row above is the point-wise test at 4.6322 GHz. The paper
 F3 per-trial minimum depth: sand -41.12 +- 1.51 dB, PE -41.22 +- 2.33 dB, Welch p = 0.939
 
 ------------------------------------------------------------------------------
-3. Table 3 - loaded quality factors and notch parameters
+3. Table 5 - loaded quality factors and notch parameters
 ------------------------------------------------------------------------------
 Feature Load       fr (GHz)    depth (dB)           Q_L  pts <3dB
 F1      air          2.3646          5.33          19.1        10

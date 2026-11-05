@@ -294,10 +294,10 @@ main <- function() {
   say()
 
   # ---------------------------------------------------------------------------
-  # 2. Table 2: replicate statistics at the analysed features
+  # 2. Table 4: replicate statistics at the analysed features
   # ---------------------------------------------------------------------------
   say(rule("-"))
-  say("2. Table 2 - replicate statistics by spectral feature")
+  say("2. Table 4 - replicate statistics by spectral feature")
   say(rule("-"))
   say(sprintf("%-11s%9s%9s%19s%19s%8s%6s%10s%9s%9s",
               "Feature", "GHz", "air", "sand mean+-SD", "PE mean+-SD",
@@ -334,10 +334,10 @@ main <- function() {
   say()
 
   # ---------------------------------------------------------------------------
-  # 3. Table 3: loaded quality factors and notch parameters
+  # 3. Table 5: loaded quality factors and notch parameters
   # ---------------------------------------------------------------------------
   say(rule("-"))
-  say("3. Table 3 - loaded quality factors and notch parameters")
+  say("3. Table 5 - loaded quality factors and notch parameters")
   say(rule("-"))
   say(sprintf("%-8s%-7s%12s%14s%14s%10s", "Feature", "Load", "fr (GHz)",
               "depth (dB)", "Q_L", "pts <3dB"))

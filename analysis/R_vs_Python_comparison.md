@@ -26,7 +26,7 @@ versions are NumPy 2.4.4, SciPy 1.17.1). Line endings were not counted.
 ## Result 1 — printed reports
 
 The R transcript is **identical line for line** (112 of 112 lines) to the Python output
-and to `expected_output.txt`. This includes Table 2, Table 3, the F2/F4 displacement,
+and to `expected_output.txt`. This includes Table 4, Table 5, the F2/F4 displacement,
 flank steepness, the F4 phase diagnostic, and the LOO and permutation results.
 
 ## Result 2 — full-precision values
@@ -38,7 +38,7 @@ flank steepness, the F4 phase diagnostic, and the LOO and permutation results.
 | Benjamini–Hochberg q | 501 | 9.0e-14 | 6.2e-13 |
 | Sand − PE mean difference | 501 | 1.4e-14 | 3.6e-12 |
 | Cohen's d | 501 | 5.1e-13 | 3.6e-12 |
-| Table 2 (air, means, SDs, diff, d) | 7 each | ≤ 5.8e-14 | ≤ 3.8e-14 |
+| Table 4 (air, means, SDs, diff, d) | 7 each | ≤ 5.8e-14 | ≤ 3.8e-14 |
 | Notch f_r, resolved points | 44 | 0 | 0 |
 | Notch depth (dB) / bandwidth (Hz) / Q_L | 44 | 5.0e-14 / 4.8e-7 / 7.1e-14 | ≤ 3.8e-15 |
 | F2/F4 displacement (Hz) / SD (Hz) / Welch p | 2 each | 0 / 4.7e-9 / 4.5e-17 | ≤ 2.8e-15 |

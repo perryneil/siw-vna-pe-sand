@@ -295,10 +295,10 @@ def main():
     say("")
 
     # ------------------------------------------------------------------
-    # 2. Table 2: replicate statistics at the analysed features
+    # 2. Table 4: replicate statistics at the analysed features
     # ------------------------------------------------------------------
     say("-" * 78)
-    say("2. Table 2 - replicate statistics by spectral feature")
+    say("2. Table 4 - replicate statistics by spectral feature")
     say("-" * 78)
     say(f"{'Feature':<11}{'GHz':>9}{'air':>9}{'sand mean+-SD':>19}{'PE mean+-SD':>19}"
         f"{'diff':>8}{'d':>6}{'raw p':>10}{'Holm':>9}{'BH q':>9}")
@@ -332,10 +332,10 @@ def main():
     say("")
 
     # ------------------------------------------------------------------
-    # 3. Table 3: loaded quality factors and notch parameters
+    # 3. Table 5: loaded quality factors and notch parameters
     # ------------------------------------------------------------------
     say("-" * 78)
-    say("3. Table 3 - loaded quality factors and notch parameters")
+    say("3. Table 5 - loaded quality factors and notch parameters")
     say("-" * 78)
     say(f"{'Feature':<8}{'Load':<7}{'fr (GHz)':>12}{'depth (dB)':>14}{'Q_L':>14}{'pts <3dB':>10}")
     for fname, band in BANDS.items():

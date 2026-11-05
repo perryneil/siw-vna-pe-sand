@@ -3,8 +3,8 @@
 Data and analysis code for the article:
 
 > **Higher-order microwave resonances discriminate polyethylene microplastic from sand**
-> Perry Neil J. Fernandez, Romeric F. Pobre, Yuen-Wa Ho
-> Submitted to the *South African Journal of Science* (2026).
+> Perry Neil J. Fernandez, Romeric F. Pobre
+> Submitted to *Physica Scripta* (2026).
 
 A two-port substrate integrated waveguide (SIW) cavity was measured with an open-source
 LibreVNA vector network analyser. The measurements are an air baseline plus five independent
@@ -35,7 +35,7 @@ figures/
   make_figure3.py          Figure 3
   make_figure4.py          Figure 4
   make_figure5.py          Figure 5
-  make_supplementary_figure1.py   Supplementary figure 1
+  make_supplementary_figure1.py   Supplementary figure S1
   output/                  figures as produced by the scripts
 requirements.txt
 LICENSE
@@ -100,9 +100,9 @@ Details are in `analysis/R_vs_Python_comparison.md`.
 1. Point-wise Welch t-tests at all 501 frequencies, with Holm–Bonferroni (family-wise error
    rate) and Benjamini–Hochberg (false discovery rate) adjustment. This gives the seven
    Holm-surviving points: 1.0088 GHz, 3.4204–3.4804 GHz and 5.5081 GHz.
-2. **Table 2**: mean ± SD for sand and PE at each analysed feature, the difference, Cohen's d,
+2. **Table 4**: mean ± SD for sand and PE at each analysed feature, the difference, Cohen's d,
    raw and adjusted p. It also gives the F3 per-trial dip-depth test.
-3. **Table 3**: notch frequency, depth and loaded quality factor Q_L for air, PE and sand.
+3. **Table 5**: notch frequency, depth and loaded quality factor Q_L for air, PE and sand.
 4. The one-sample-step displacement of the loaded minimum at F2 and F4.
 5. The air-baseline flank slope |dS21/df| at F1–F4.
 6. The F4 diagnostic: the −67.2 dB single sample, its neighbours, the phase reversal across
