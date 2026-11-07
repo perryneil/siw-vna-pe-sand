@@ -6,8 +6,8 @@ raman_band_analysis.py
 Band analysis of the Raman spectra used to verify the identity of the
 polyethylene (PE) fraction in
 
-    "Higher-order microwave resonances discriminate polyethylene
-     microplastic from sand"
+    "Higher-frequency transmission features of a microwave cavity
+     discriminate polyethylene microplastic from sand"
 
 For the PE spectrum the script:
 

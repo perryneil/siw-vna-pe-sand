@@ -145,8 +145,8 @@ prints:
 4. Assigns the peaks to literature PE, PP and PS bands (±8 cm⁻¹).
 5. Checks the PP, PS and calcite marker positions for any detected peak.
 
-The PE spectrum matches 8 of 9 reference PE bands, including the 1418 cm⁻¹ band of the
-orthorhombic crystalline phase. No peak is detected at any PP, PS or calcite marker. The
+The PE spectrum matches 8 of 9 reference PE bands, including the band of the
+orthorhombic crystalline phase (observed at 1418.6 cm⁻¹, labelled 1419 in supplementary figure S1). No peak is detected at any PP, PS or calcite marker. The
 intensity near 1086 cm⁻¹ is the amorphous ν(C–C) shoulder of PE itself, not a calcite band.
 Because a single spectrum was measured, this confirms the identity of the probed material,
 not the purity of the whole batch.
