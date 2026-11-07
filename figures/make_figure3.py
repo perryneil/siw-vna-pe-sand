@@ -5,7 +5,7 @@ measurement, overlaid.
 
 Each trace is drawn on its own frequency axis, exactly as exported: no
 resampling, alignment or interpolation. Annotated:
-  - the three simulated resonance peaks below 5 GHz (blue dots),
+  - the four simulated resonance peaks in the sweep (blue dots),
   - the measured maxima near 2.00, 2.65 and 4.50 GHz (open triangles),
   - the measured minima F1-F4 (red triangles), located with the same search
     bands as analysis/siw_analysis.py.
@@ -40,7 +40,7 @@ BLUE, GREY, RED = "#1f77b4", "#2b2b2b", "#d62728"
 
 # Label positions (GHz, dB) for the F labels, chosen to keep text clear of the traces
 F_LABEL_XY = {"F1": (2.38, -24.5), "F2": (3.21, -40.5), "F3": (4.63, -51.5), "F4": (4.85, -62.0)}
-SIM_LABEL_XY = [(1.90, -19.5), (2.98, -13.5), (4.72, -10.5)]
+SIM_LABEL_XY = [(1.90, -19.5), (2.98, -13.5), (3.88, -3.5), (5.05, -6.5)]
 
 
 def local_extreme(f, y, lo, hi, fn):
@@ -55,7 +55,6 @@ def main():
     f_meas, s_meas = air["f"] / 1e9, air["db"]
 
     sim_peaks, _ = find_peaks(s_sim, prominence=3)
-    sim_peaks = [i for i in sim_peaks if f_sim[i] < 5.0]
     maxima = [local_extreme(f_meas, s_meas, lo, hi, np.argmax) for lo, hi in MAXIMA_BANDS]
     minima = {k: local_extreme(f_meas, s_meas, lo, hi, np.argmin) for k, (lo, hi) in MINIMA_BANDS.items()}
 

@@ -20,7 +20,7 @@ import numpy as np
 from common import load_all, out_path
 
 C_AIR, C_PE, C_SAND = "#404040", "#1f77b4", "#d62728"
-HIGHLIGHTS = [(3.42, 3.51), (5.46, 5.555)]   # GHz, discriminating regions
+HIGHLIGHTS = [(3.414, 3.486), (5.46, 5.555)]   # GHz: F2-flank Holm region (3.420-3.480 GHz) and the F4 notch
 
 
 def band(ax, f, group, colour, label, lw=2.0):
@@ -51,8 +51,8 @@ def main():
     ax.legend(loc="lower left")
 
     zooms = [
-        (gs[1, 0], (3.30, 3.58), "(b) Second-mode flank ≈ 3.45 GHz", "upper right"),
-        (gs[1, 1], (5.30, 5.69), "(c) High-order feature ≈ 5.5 GHz", "lower left"),
+        (gs[1, 0], (3.30, 3.58), "(b) F2 flank, 3.30–3.58 GHz", "upper right"),
+        (gs[1, 1], (5.30, 5.69), "(c) F4 null, 5.30–5.69 GHz", "lower left"),
     ]
     for spec, (lo, hi), title, loc in zooms:
         a = fig.add_subplot(spec)

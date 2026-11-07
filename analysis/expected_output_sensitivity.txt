@@ -1,0 +1,136 @@
+==============================================================================
+SIW-VNA: calibration, measurement-order and robustness checks
+==============================================================================
+Measurement order: air baseline, sand_0001-0005, PE_0001-0005
+
+------------------------------------------------------------------------------
+1. S-parameters present in the exports
+------------------------------------------------------------------------------
+columns found for: ['S11', 'S21']
+
+------------------------------------------------------------------------------
+2. Passivity check: |S11| > 1 is impossible for a passive device
+------------------------------------------------------------------------------
+air     |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +22.5 dB
+sand_1  |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +21.2 dB
+sand_2  |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +21.6 dB
+sand_3  |S11| > 1 at 85 points (3.648-4.656 GHz); max |S11| = +21.2 dB
+sand_4  |S11| > 1 at 87 points (3.624-4.656 GHz); max |S11| = +21.3 dB
+sand_5  |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +21.8 dB
+PE_1    |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +22.4 dB
+PE_2    |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +22.6 dB
+PE_3    |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +21.1 dB
+PE_4    |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +21.4 dB
+PE_5    |S11| > 1 at 86 points (3.636-4.656 GHz); max |S11| = +22.0 dB
+
+------------------------------------------------------------------------------
+3. VSWR at the notch frequencies (from |S11|)
+------------------------------------------------------------------------------
+F1 2.3646 GHz: air 7.17; sand SD 0.09 (range 0.22); PE SD 0.03 (range 0.09)
+F2 3.5044 GHz: air 4.08; sand SD 0.04 (range 0.11); PE SD 0.04 (range 0.11)
+F3 4.6322 GHz: |S11| = 1.31 on the air trace; VSWR undefined
+F4 5.5081 GHz: air 4.34; sand SD 0.02 (range 0.06); PE SD 0.04 (range 0.09)
+
+------------------------------------------------------------------------------
+4. Port error terms implied by the SOLT calibration file
+------------------------------------------------------------------------------
+calibration: SOLT ports [1, 2] | kit: Default calibration kit with ideal standards
+standards measured 2026-06-06 23:40:26 to 23:42:50 (UTC+8)
+port 1: |e11| > 1 at 31 points (4.512-5.004 GHz)
+   3.001 GHz  |e11| = 0.12  angle((O-L)/(S-L)) =  -171 deg
+   3.504 GHz  |e11| = 0.05  angle((O-L)/(S-L)) =  -174 deg
+   3.996 GHz  |e11| = 0.39  angle((O-L)/(S-L)) =  -148 deg
+   4.296 GHz  |e11| = 0.55  angle((O-L)/(S-L)) =  -134 deg
+   4.596 GHz  |e11| = 1.10  angle((O-L)/(S-L)) =   -76 deg
+   4.800 GHz  |e11| = 1.22  angle((O-L)/(S-L)) =   +70 deg
+   5.004 GHz  |e11| = 1.00  angle((O-L)/(S-L)) =   +90 deg
+   5.496 GHz  |e11| = 0.23  angle((O-L)/(S-L)) =  +161 deg
+   max |e11| = 1.42; max departure of the open-short phase difference from 180 deg = 176 deg
+   at the reported features: 2.3646 GHz |e11| = 0.10; 3.4204 GHz |e11| = 0.18; 3.4444 GHz |e11| = 0.13; 3.4684 GHz |e11| = 0.08; 4.6322 GHz |e11| = 1.13; 5.5081 GHz |e11| = 0.28
+port 2: |e11| > 1 at 0 points
+   3.001 GHz  |e11| = 0.10  angle((O-L)/(S-L)) =  +175 deg
+   3.504 GHz  |e11| = 0.20  angle((O-L)/(S-L)) =  +158 deg
+   3.996 GHz  |e11| = 0.32  angle((O-L)/(S-L)) =  -165 deg
+   4.296 GHz  |e11| = 0.36  angle((O-L)/(S-L)) =  -166 deg
+   4.596 GHz  |e11| = 0.29  angle((O-L)/(S-L)) =  -169 deg
+   4.800 GHz  |e11| = 0.30  angle((O-L)/(S-L)) =  -160 deg
+   5.004 GHz  |e11| = 0.42  angle((O-L)/(S-L)) =  +134 deg
+   5.496 GHz  |e11| = 0.28  angle((O-L)/(S-L)) =  -155 deg
+   max |e11| = 0.43; max departure of the open-short phase difference from 180 deg = 46 deg
+   at the reported features: 2.3646 GHz |e11| = 0.14; 3.4204 GHz |e11| = 0.17; 3.4444 GHz |e11| = 0.18; 3.4684 GHz |e11| = 0.19; 4.6322 GHz |e11| = 0.37; 5.5081 GHz |e11| = 0.29
+
+------------------------------------------------------------------------------
+5. Drift with measurement order (mean S21 minus air, off-resonance bands)
+------------------------------------------------------------------------------
+ 0.1-1 GHz: offsets in order [-0.05  -0.012 -0.049 -0.066 -0.035 -0.06  -0.096 -0.081 -0.089 -0.1  ]; Spearman rho = -0.82, p = 0.004
+   1-2 GHz: offsets in order [-0.007  0.004 -0.033 -0.036 -0.005 -0.075 -0.093 -0.073 -0.089 -0.104]; Spearman rho = -0.84, p = 0.002
+ 2-3.3 GHz: offsets in order [-0.031  0.014 -0.05  -0.059 -0.02  -0.058 -0.059 -0.073 -0.069 -0.096]; Spearman rho = -0.87, p = 0.001
+
+------------------------------------------------------------------------------
+6. Feature differences adjusted for drift (value ~ material + drift index)
+------------------------------------------------------------------------------
+Material and order are confounded (all sand before all PE), so the adjustment is a
+sensitivity check. It is repeated for three definitions of the drift index, each the mean
+of S21 - air over a band without discriminating features.
+drift index over 0.1-2.0 GHz: correlation with material r = -0.90
+   2.3646 GHz: sand - PE raw +0.05 dB, adjusted -0.02 dB ( -35% of raw), p = 0.231
+   3.4204 GHz: sand - PE raw -0.33 dB, adjusted -0.24 dB (  73% of raw), p = 0.0447
+   3.4444 GHz: sand - PE raw -0.48 dB, adjusted -0.38 dB (  78% of raw), p = 0.014
+   3.4684 GHz: sand - PE raw -0.66 dB, adjusted -0.50 dB (  76% of raw), p = 0.016
+   4.6322 GHz: sand - PE raw -0.36 dB, adjusted +3.91 dB (-1073% of raw), p = 0.239
+   5.5081 GHz: sand - PE raw +7.62 dB, adjusted +5.70 dB (  75% of raw), p = 0.0419
+drift index over 1.0-2.0 GHz: correlation with material r = -0.93
+   2.3646 GHz: sand - PE raw +0.05 dB, adjusted -0.03 dB ( -67% of raw), p = 0.114
+   3.4204 GHz: sand - PE raw -0.33 dB, adjusted -0.26 dB (  79% of raw), p = 0.0792
+   3.4444 GHz: sand - PE raw -0.48 dB, adjusted -0.37 dB (  76% of raw), p = 0.0399
+   3.4684 GHz: sand - PE raw -0.66 dB, adjusted -0.47 dB (  71% of raw), p = 0.0486
+   4.6322 GHz: sand - PE raw -0.36 dB, adjusted +4.56 dB (-1250% of raw), p = 0.274
+   5.5081 GHz: sand - PE raw +7.62 dB, adjusted +4.35 dB (  57% of raw), p = 0.147
+drift index over 1.0-3.3 GHz: correlation with material r = -0.85
+   2.3646 GHz: sand - PE raw +0.05 dB, adjusted -0.00 dB (  -5% of raw), p = 0.838
+   3.4204 GHz: sand - PE raw -0.33 dB, adjusted -0.31 dB (  93% of raw), p = 0.0107
+   3.4444 GHz: sand - PE raw -0.48 dB, adjusted -0.45 dB (  94% of raw), p = 0.00345
+   3.4684 GHz: sand - PE raw -0.66 dB, adjusted -0.61 dB (  92% of raw), p = 0.00402
+   4.6322 GHz: sand - PE raw -0.36 dB, adjusted +2.49 dB (-684% of raw), p = 0.389
+   5.5081 GHz: sand - PE raw +7.62 dB, adjusted +6.56 dB (  86% of raw), p = 0.0137
+Trend within the sand trials (measured first), slope per trial and Spearman rho:
+   3.4204 GHz: slope -0.022 dB per trial, rho = -0.30; sand - PE = -0.33 dB
+   3.4684 GHz: slope -0.047 dB per trial, rho = -0.60; sand - PE = -0.66 dB
+   5.5081 GHz: slope -0.405 dB per trial, rho = -0.50; sand - PE = +7.62 dB
+
+------------------------------------------------------------------------------
+7. Robustness to the step between PE_0003 and PE_0004
+------------------------------------------------------------------------------
+2.3646 GHz sand vs PE 1-3: sand - PE +0.04 dB, Welch p 0.022, ranges separated: True
+2.3646 GHz sand vs PE 4-5: sand - PE +0.06 dB, Welch p 0.0036, ranges separated: True
+3.4204 GHz sand vs PE 1-3: sand - PE -0.34 dB, Welch p 0.014, ranges separated: True
+3.4204 GHz sand vs PE 4-5: sand - PE -0.32 dB, Welch p 0.0038, ranges separated: True
+3.4444 GHz sand vs PE 1-3: sand - PE -0.46 dB, Welch p 0.013, ranges separated: True
+3.4444 GHz sand vs PE 4-5: sand - PE -0.52 dB, Welch p 0.0091, ranges separated: True
+3.4684 GHz sand vs PE 1-3: sand - PE -0.63 dB, Welch p 0.016, ranges separated: True
+3.4684 GHz sand vs PE 4-5: sand - PE -0.71 dB, Welch p 1.9e-05, ranges separated: True
+4.6322 GHz sand vs PE 1-3: sand - PE +1.72 dB, Welch p 0.086, ranges separated: False
+4.6322 GHz sand vs PE 4-5: sand - PE -3.49 dB, Welch p 0.0057, ranges separated: True
+5.5081 GHz sand vs PE 1-3: sand - PE +8.03 dB, Welch p 0.0097, ranges separated: True
+5.5081 GHz sand vs PE 4-5: sand - PE +7.00 dB, Welch p 0.024, ranges separated: True
+
+------------------------------------------------------------------------------
+8. Small-sample inference
+------------------------------------------------------------------------------
+3.4684 GHz: exact two-sided permutation p = 2/252 = 0.0079 (Holm threshold for 501 tests = 1.0e-04)
+5.5081 GHz: exact two-sided permutation p = 2/252 = 0.0079 (Holm threshold for 501 tests = 1.0e-04)
+3.4204 GHz: Cohen's d = 4.74, 95% CI 2.12 to 7.31 (noncentral t)
+3.4444 GHz: Cohen's d = 5.89, 95% CI 2.78 to 8.95 (noncentral t)
+3.4684 GHz: Cohen's d = 5.81, 95% CI 2.73 to 8.84 (noncentral t)
+3.4804 GHz: Cohen's d = 4.58, 95% CI 2.02 to 7.07 (noncentral t)
+5.5081 GHz: Cohen's d = 4.76, 95% CI 2.13 to 7.33 (noncentral t)
+F2: minimum below the air minimum (3.5044 GHz) in 4/5 sand and 0/5 PE trials; Fisher exact two-sided p = 0.048
+F4: minimum below the air minimum (5.5081 GHz) in 4/5 sand and 0/5 PE trials; Fisher exact two-sided p = 0.048
+
+------------------------------------------------------------------------------
+9. Simulated resonances (CST export) and 3 dB loaded Q
+------------------------------------------------------------------------------
+peak 2.1709 GHz, -22.84 dB, 3 dB bandwidth 61 MHz, Q_L = 35.8
+peak 3.2316 GHz, -16.97 dB, 3 dB bandwidth 99 MHz, Q_L = 32.7
+peak 4.5545 GHz, -12.09 dB, 3 dB bandwidth 166 MHz, Q_L = 27.5
+peak 5.4867 GHz, -12.15 dB, 3 dB bandwidth 195 MHz, Q_L = 28.2

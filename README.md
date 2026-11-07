@@ -2,14 +2,15 @@
 
 Data and analysis code for the article:
 
-> **Higher-order microwave resonances discriminate polyethylene microplastic from sand**
+> **Higher-frequency transmission features of a microwave cavity discriminate polyethylene microplastic from sand**
 > Perry Neil J. Fernandez, Romeric F. Pobre
 > Submitted to *Physica Scripta* (2026).
 
 A two-port substrate integrated waveguide (SIW) cavity was measured with an open-source
 LibreVNA vector network analyser. The measurements are an air baseline plus five independent
 fill-and-reload trials each of polyethylene (PE) microplastic and beach sand. Each sweep has
-501 points from 1 MHz to 6 GHz. The code in this repository recomputes the statistics and
+501 points from 1 MHz to 6 GHz. The sweeps were taken after a single SOLT calibration, in the
+order air baseline, sand_0001–0005, PE_0001–0005. The code in this repository recomputes the statistics and
 characterisation results in the article, and redraws the data figures, directly from the raw
 files.
 
@@ -20,13 +21,16 @@ data/
   vna/        11 raw LibreVNA exports (air baseline, PE_0001–0005, sand_0001–0005)
   raman/      Raman spectrum of the PE fraction (Php-MP-Raman-PE.txt)
   simulation/ CST simulation of the air-filled cavity (S21-air-cst-v2.txt)
+  calibration/ the LibreVNA SOLT calibration used for every sweep (SOLT_12_1_00M-6_00G_501pt.cal)
 analysis/
-  siw_analysis.py          all transmission statistics (Tables 2 and 3, Results)
+  siw_analysis.py          all transmission statistics (Tables 4 and 5, Results)
   expected_output.txt      the output of that script, for comparison
   siw_analysis.R           independent R version of siw_analysis.py
   expected_output_R.txt    the output of the R version
   compare_r_python.py      runs both versions and compares their results
   R_vs_Python_comparison.md   outcome of that comparison
+  sensitivity_checks.py    calibration, measurement-order and robustness checks
+  expected_output_sensitivity.txt   the output of that script, for comparison
 characterisation/
   raman_band_analysis.py   Raman band assignment for the PE fraction
   expected_output.txt      the output of that script, for comparison
@@ -55,6 +59,7 @@ Run every command from the repository root.
 
 ```bash
 python analysis/siw_analysis.py                     # transmission statistics
+python analysis/sensitivity_checks.py               # calibration, drift and robustness checks
 python characterisation/raman_band_analysis.py      # Raman band analysis
 python figures/make_figure3.py                      # -> figures/output/Figure_3.png
 python figures/make_figure4.py                      # -> figures/output/Figure_4.png
@@ -64,7 +69,8 @@ python figures/make_supplementary_figure1.py        # -> figures/output/Suppleme
 
 The two analysis scripts accept `--out FILE` to save a transcript. They also accept `--data DIR`
 if the data are stored elsewhere. Compare your transcript with the `expected_output.txt` in the
-same folder.
+same folder. `sensitivity_checks.py` accepts `--out FILE`; compare it with
+`analysis/expected_output_sensitivity.txt`.
 
 ## R version of the statistics
 
@@ -93,6 +99,26 @@ floating-point rounding. Two implementation details differ:
 
 Details are in `analysis/R_vs_Python_comparison.md`.
 
+## Calibration, measurement order and robustness
+
+`analysis/sensitivity_checks.py` reproduces section 3.6 of the article (calibration integrity
+and measurement-order effects) and its Table 6. From the raw exports, the calibration file and the CST export it
+prints:
+
+1. The S-parameters present in the exports (S11 and S21).
+2. A passivity check. The corrected |S11| exceeds 1 between about 3.6 and 4.7 GHz in every
+   export, including the air baseline.
+3. VSWR at the four notches. VSWR is undefined at F3, where |S11| > 1.
+4. The port error terms implied by the calibration file. The kit is LibreVNA's
+   ideal-standard kit. The port-1 source match derived from the open, short and load
+   standards exceeds unity between 4.51 and 5.00 GHz, which explains the |S11| > 1 band.
+5. The drift of the off-resonance transmission with measurement order.
+6. The feature differences after adjustment for that drift.
+7. Robustness of the features to the step change between PE_0003 and PE_0004.
+8. Exact permutation limits for 5 + 5 trials, 95 % confidence intervals for Cohen's d, and
+   Fisher's exact test for the one-step displacement of the F2 and F4 minima.
+9. The simulated resonances and their 3 dB loaded Q from the CST export.
+
 ## What each script reproduces
 
 **`analysis/siw_analysis.py`** reads the eleven VNA exports and prints, in order:
@@ -107,8 +133,9 @@ Details are in `analysis/R_vs_Python_comparison.md`.
 5. The air-baseline flank slope |dS21/df| at F1–F4.
 6. The F4 diagnostic: the −67.2 dB single sample, its neighbours, the phase reversal across
    the null, and the 5–6 GHz band median and tenth percentile.
-7. Class ranges and gaps, the leave-one-out nearest-centroid result, and the permutation
-   p-value for complete separation, 1/C(10,5).
+7. Class ranges and gaps, the leave-one-out nearest-centroid result, and the one-sided
+   permutation p-value for complete separation, 1/C(10,5). The article quotes the two-sided
+   value, 2/C(10,5) = 7.9 × 10⁻³, which `sensitivity_checks.py` prints.
 
 **`characterisation/raman_band_analysis.py`** processes the PE spectrum in five steps:
 
@@ -143,7 +170,11 @@ through a 10× objective.
 
 `data/simulation/S21-air-cst-v2.txt` is the CST Studio Suite export of the simulated air-filled
 cavity: two columns, frequency (GHz) and |S21| (dB), from 0.1 to 6 GHz. Figure 3 plots it and the
-measured air baseline each on its own frequency axis, without resampling or alignment.
+measured air baseline each on its own frequency axis, without resampling or alignment. The model
+was built in CST Studio Suite (Learning Edition) with the design dimensions in Table 1 of the
+article, including the 8 mm × 8 mm sample window. The substrate uses CST's built-in FR-4 (lossy)
+material (εr = 4.3, tan δ = 0.025). The parameter list in the file header is copied from the CST
+project as exported; its `eps_r` entry is not used by that material.
 
 ## Conventions made explicit by the code
 
