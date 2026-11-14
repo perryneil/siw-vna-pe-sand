@@ -1,0 +1,10 @@
+sample step 11.998 MHz; frequency-grid standard uncertainty (rectangular over one step) 3.46 MHz
+
+feature       f (GHz)   Delta    u_A  nu_eff      a    u_D    u_c  U(k=2)  |D|/U
+F1 min         2.3646   +0.05  0.013     6.7   0.08  0.048  0.050    0.10    0.5
+F2 flank       3.4204   -0.33  0.044     7.8   0.09  0.051  0.068    0.14    2.4
+F2 flank       3.4444   -0.48  0.052     6.8   0.12  0.068  0.086    0.17    2.8
+F2 flank       3.4684   -0.66  0.072     6.9   0.19  0.111  0.132    0.26    2.5
+F4 null        5.5081   +7.62  1.013     7.7   3.27  1.885  2.140    4.28    1.8
+
+With k = t_0.975(7) = 2.36 instead of 2, every |Delta|/U for the F2 flank and F4 remains above 1.
