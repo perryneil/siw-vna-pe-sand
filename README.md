@@ -4,7 +4,7 @@ Data and analysis code for the article:
 
 > **Higher-frequency transmission features of a microwave cavity discriminate polyethylene microplastic from sand**
 > Perry Neil J. Fernandez, Romeric F. Pobre
-> Submitted to *Physica Scripta* (2026).
+> Submitted to *Measurement Science and Technology* (2026).
 
 A two-port substrate integrated waveguide (SIW) cavity was measured with an open-source
 LibreVNA vector network analyser. The measurements are an air baseline plus five independent
@@ -23,7 +23,7 @@ data/
   simulation/ CST simulation of the air-filled cavity (S21-air-cst-v2.txt)
   calibration/ the LibreVNA SOLT calibration used for every sweep (SOLT_12_1_00M-6_00G_501pt.cal)
 analysis/
-  siw_analysis.py          all transmission statistics (Tables 4 and 5, Results)
+  siw_analysis.py          all transmission statistics (Tables 2 and 3, Results)
   expected_output.txt      the output of that script, for comparison
   siw_analysis.R           independent R version of siw_analysis.py
   expected_output_R.txt    the output of the R version
@@ -31,6 +31,8 @@ analysis/
   R_vs_Python_comparison.md   outcome of that comparison
   sensitivity_checks.py    calibration, measurement-order and robustness checks
   expected_output_sensitivity.txt   the output of that script, for comparison
+  uncertainty_budget.py    GUM uncertainty budget for the sand–PE differences (Table 5)
+  expected_output_uncertainty.txt   the output of that script, for comparison
 characterisation/
   raman_band_analysis.py   Raman band assignment for the PE fraction
   expected_output.txt      the output of that script, for comparison
@@ -39,7 +41,7 @@ figures/
   make_figure3.py          Figure 3
   make_figure4.py          Figure 4
   make_figure5.py          Figure 5
-  make_supplementary_figure1.py   Supplementary figure S1
+  make_supplementary_figure1.py   Figure A1 (appendix; Raman spectrum)
   output/                  figures as produced by the scripts
 requirements.txt
 LICENSE
@@ -60,6 +62,7 @@ Run every command from the repository root.
 ```bash
 python analysis/siw_analysis.py                     # transmission statistics
 python analysis/sensitivity_checks.py               # calibration, drift and robustness checks
+python analysis/uncertainty_budget.py               # uncertainty budget (Table 5)
 python characterisation/raman_band_analysis.py      # Raman band analysis
 python figures/make_figure3.py                      # -> figures/output/Figure_3.png
 python figures/make_figure4.py                      # -> figures/output/Figure_4.png
@@ -101,8 +104,8 @@ Details are in `analysis/R_vs_Python_comparison.md`.
 
 ## Calibration, measurement order and robustness
 
-`analysis/sensitivity_checks.py` reproduces section 3.6 of the article (calibration integrity
-and measurement-order effects) and its Table 6. From the raw exports, the calibration file and the CST export it
+`analysis/sensitivity_checks.py` reproduces section 3.5 of the article (calibration integrity
+and measurement-order effects) and its Table 4. From the raw exports, the calibration file and the CST export it
 prints:
 
 1. The S-parameters present in the exports (S11 and S21).
@@ -119,16 +122,28 @@ prints:
    Fisher's exact test for the one-step displacement of the F2 and F4 minima.
 9. The simulated resonances and their 3 dB loaded Q from the CST export.
 
+## Uncertainty budget
+
+`analysis/uncertainty_budget.py` reproduces section 3.6 of the article and its Table 5. It
+evaluates the sand–PE difference in |S21| at F1, the Holm-significant F2-flank frequencies and F4
+following the GUM: a Type A term from the five reloads per class (Welch–Satterthwaite degrees of
+freedom), a Type B drift term taken as the largest change across the three drift definitions
+(rectangular, a/√3), and the expanded uncertainty U at k = 2. Compare its output with
+`analysis/expected_output_uncertainty.txt`.
+
 ## What each script reproduces
+
+The table numbers printed by the scripts follow an earlier draft of the article. Printed
+Tables 4, 5, 6 and 7 correspond to Tables 2, 3, 4 and 5 of the submitted article.
 
 **`analysis/siw_analysis.py`** reads the eleven VNA exports and prints, in order:
 
 1. Point-wise Welch t-tests at all 501 frequencies, with Holm–Bonferroni (family-wise error
    rate) and Benjamini–Hochberg (false discovery rate) adjustment. This gives the seven
    Holm-surviving points: 1.0088 GHz, 3.4204–3.4804 GHz and 5.5081 GHz.
-2. **Table 4**: mean ± SD for sand and PE at each analysed feature, the difference, Cohen's d,
+2. **Table 2**: mean ± SD for sand and PE at each analysed feature, the difference, Cohen's d,
    raw and adjusted p. It also gives the F3 per-trial dip-depth test.
-3. **Table 5**: notch frequency, depth and loaded quality factor Q_L for air, PE and sand.
+3. **Table 3**: notch frequency, depth and loaded quality factor Q_L for air, PE and sand.
 4. The one-sample-step displacement of the loaded minimum at F2 and F4.
 5. The air-baseline flank slope |dS21/df| at F1–F4.
 6. The F4 diagnostic: the −67.2 dB single sample, its neighbours, the phase reversal across
@@ -146,7 +161,7 @@ prints:
 5. Checks the PP, PS and calcite marker positions for any detected peak.
 
 The PE spectrum matches 8 of 9 reference PE bands, including the band of the
-orthorhombic crystalline phase (observed at 1418.6 cm⁻¹, labelled 1419 in supplementary figure S1). No peak is detected at any PP, PS or calcite marker. The
+orthorhombic crystalline phase (observed at 1418.6 cm⁻¹, labelled 1419 in Figure A1). No peak is detected at any PP, PS or calcite marker. The
 intensity near 1086 cm⁻¹ is the amorphous ν(C–C) shoulder of PE itself, not a calcite band.
 Because a single spectrum was measured, this confirms the identity of the probed material,
 not the purity of the whole batch.
@@ -171,7 +186,7 @@ through a 10× objective.
 `data/simulation/S21-air-cst-v2.txt` is the CST Studio Suite export of the simulated air-filled
 cavity: two columns, frequency (GHz) and |S21| (dB), from 0.1 to 6 GHz. Figure 3 plots it and the
 measured air baseline each on its own frequency axis, without resampling or alignment. The model
-was built in CST Studio Suite (Learning Edition) with the design dimensions in Table 1 of the
+was built in CST Studio Suite (Learning Edition) with the design dimensions in Table A1 of the
 article, including the 8 mm × 8 mm sample window. The substrate uses CST's built-in FR-4 (lossy)
 material (εr = 4.3, tan δ = 0.025). The parameter list in the file header is copied from the CST
 project as exported; its `eps_r` entry is not used by that material.
